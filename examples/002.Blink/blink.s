@@ -1,5 +1,6 @@
 
 .syntax unified
+.align 4
 .cpu cortex-m33
 .thumb
 
@@ -20,7 +21,7 @@ image_def:
 .global vector_initialization
 vector_initialization:
     .word STACK_TOP_ADDRESS                         @ Stack top address
-    .word stack_initialization                      @ Stack initialization function
+    .word stack_initialization                      @ Stack initialization function (Thumb bit set)
 
 @ Stack pointer initialization
 
@@ -34,7 +35,7 @@ stack_initialization:
 
 @ Program
 
-.equ LED_PIN, 10
+.equ LED_PIN, 15
 .equ LED_PIN_MASK, (1 << LED_PIN)
 .equ LED_PAD_SETUP, 0x56                            @ 4mA pull-down Schmitt input
 
@@ -63,7 +64,7 @@ led_on:
 
 .thumb_func
 led_off:
-    ldr r0, =0xd0000000                             @ SID_BASE address
+    ldr r0, =0xd0000000                             @ SIO register base address
     ldr r1, =LED_PIN_MASK
     str r1, [r0, #0x020]                            @ GPIO OUT CLEAR
     bx lr
@@ -123,7 +124,7 @@ setup_GPIO:
     lsls r1, r1, #3                                 @ Each GPIO offset is 8 so 3 left shifts
     adds r0, r0, r1             
     adds r0, r0, #0x04                              @ adds 4 to point CTRL not STATUS
-                
+
     movs r1, #5                                     @ selects SIO (F5)
     str r1, [r0]
 
