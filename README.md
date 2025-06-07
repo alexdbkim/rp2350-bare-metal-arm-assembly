@@ -1,5 +1,5 @@
 
-# ARM Assembly Programming with Raspberry Pi RP2350 Microcontroller
+# Bare Metal ARM Assembly with Raspberry Pi RP2350
 
 Nothing but bare-metal native ARM assembly codes.
 
