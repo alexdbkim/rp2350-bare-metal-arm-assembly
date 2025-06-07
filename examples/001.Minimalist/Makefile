@@ -21,7 +21,7 @@ DUMP_DIR = dump
 S_FILES = $(wildcard *.s)
 O_FILES = $(patsubst %.s,$(OUTPUT_DIR)/%.o,$(S_FILES))
 
-all: clean $(OUTPUT_DIR) $(DUMP_DIR) $(NAME).uf2
+all: clean $(OUTPUT_DIR) $(DUMP_DIR) $(OUTPUT_DIR)/$(NAME).uf2
 
 $(OUTPUT_DIR):
 	mkdir -p $(OUTPUT_DIR)
@@ -32,14 +32,14 @@ $(DUMP_DIR):
 $(OUTPUT_DIR)/%.o: %.s
 	$(AS) $(AS_FLAGS) $< -o $@
 
-$(NAME).bin: $(LD_SCRIPT) $(O_FILES)
+$(OUTPUT_DIR)/$(NAME).bin: $(LD_SCRIPT) $(O_FILES)
 	$(LD) $(LD_FLAGS) -T $(LD_SCRIPT) $(O_FILES) -o $(OUTPUT_DIR)/$(NAME).elf
 	$(OBJDUMP) $(OBJDUMP_FLAGS) $(OUTPUT_DIR)/$(NAME).elf > $(OUTPUT_DIR)/$(NAME).elf.dump
 	$(foreach obj,$(O_FILES),$(OBJDUMP) $(OBJDUMP_FLAGS) $(obj) > $(obj).dump;)
 	$(OBJCOPY) -O binary $(OUTPUT_DIR)/$(NAME).elf $(OUTPUT_DIR)/$(NAME).bin
 	mv $(OUTPUT_DIR)/*.dump $(DUMP_DIR)
 
-$(NAME).uf2: $(NAME).bin
+$(OUTPUT_DIR)/$(NAME).uf2: $(OUTPUT_DIR)/$(NAME).bin
 	$(PICOTOOL) uf2 convert $(OUTPUT_DIR)/$(NAME).bin $(OUTPUT_DIR)/$(NAME).uf2
 
 clean:
