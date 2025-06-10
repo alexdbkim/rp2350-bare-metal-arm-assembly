@@ -1,5 +1,6 @@
 
 .include "include/binary_header.s"
+.include "include/address_map.s"
 
 .syntax unified
 .align 4
@@ -30,16 +31,16 @@ blink_pattern:
 
 .thumb_func
 led_on:
-    ldr r0, =0xd0000000                             @ SIO register base address
+    ldr r0, =SIO_BASE                               @ SIO register base address
     ldr r1, =LED_PIN_MASK
-    str r1, [r0, #0x018]                            @ GPIO OUT SET
+    str r1, [r0, #SIO_REG_OFFSET_GPIO_OUT_SET]      @ GPIO OUT SET
     bx lr
 
 .thumb_func
 led_off:
-    ldr r0, =0xd0000000                             @ SIO register base address
+    ldr r0, =SIO_BASE                               @ SIO register base address
     ldr r1, =LED_PIN_MASK
-    str r1, [r0, #0x020]                            @ GPIO OUT CLEAR
+    str r1, [r0, #SIO_REG_OFFSET_GPIO_OUT_CLR]      @ GPIO OUT CLEAR
     bx lr
 
 .thumb_func
@@ -59,7 +60,7 @@ gpio_initialize:
     @ Release GPIO and Pads from reset (they start in reset state)
     @ First clear the reset bits to release peripherals from reset
 
-    ldr r0, =0x40020000                             @ Resets register base address
+    ldr r0, =RESETS_BASE                            @ Resets register base address
     ldr r1, =(1 << 6)                               @ Resets IO bank 0
     ldr r2, =(1 << 9)                               @ Resets Pads bank 0
     orrs r1, r1, r2                                 @ Combining reset bits
@@ -80,7 +81,7 @@ reset_wait:
     @ Setup a pad for LED pin
 
 setup_pad:
-    ldr r0, =0x40038000
+    ldr r0, =PADS_BANK0_BASE
     adds r0, r0, #0x04                              @ Skip PAD_CONTROL_VOLTAGE_SELECT
     movs r1, #LED_PIN                   
     lsls r1, r1, #2                                 @ Multiply LED_PIN number by 4 to get offset
@@ -92,7 +93,7 @@ setup_pad:
     @ Setup GPIO function to SIO
 
 setup_GPIO:
-    ldr r0, =0x40028000
+    ldr r0, =IO_BANK0_BASE
     movs r1, #LED_PIN
     lsls r1, r1, #3                                 @ Each GPIO offset is 8 so 3 left shifts
     adds r0, r0, r1             
@@ -104,8 +105,8 @@ setup_GPIO:
     @ Setup SIO - Enable GPIO as output
 
 setup_SIO:
-    ldr r0, =0xd0000000
+    ldr r0, =SIO_BASE
     ldr r1, =LED_PIN_MASK
-    str r1, [r0, #0x038]       @ Set output enable for LED pin
+    str r1, [r0, #SIO_REG_OFFSET_GPIO_OE_SET]       @ Set output enable for LED pin
 
     pop {pc}

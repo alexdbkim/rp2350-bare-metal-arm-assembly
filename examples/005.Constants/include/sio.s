@@ -1,16 +1,11 @@
 @==============================================================================
 @
-@   MCU     : Raspberry Pi RP2305A
-@   CPU     : ARM Cortex-M33 (32-bit)
-@   Cores   : 2
-@   Date    : June 5, 2025
-@
-@   RP2350 SIO (3.1.11.)
+@   RP2350 Internal Hardware SIO 
 @
 @==============================================================================
 
-@ [SIO Registers]
-@ The SIO registers start at a base address of SIO_BASE (0xd0000000).
+.ifndef __SIO_H__
+.equ    __SIO_H__, 1
 
 .equ SIO_REG_OFFSET_CPUID, 0x000
 .equ SIO_REG_OFFSET_GPIO_IN, 0x004
@@ -120,3 +115,5 @@
 .equ SIO_REG_OFFSET_TMDS_POP_DOUBLE_L1 , 0x1dc
 .equ SIO_REG_OFFSET_TMDS_PEEK_DOUBLE_L2 , 0x1e0
 .equ SIO_REG_OFFSET_TMDS_POP_DOUBLE_L2 , 0x1e4
+
+.endif @ __SIO_H__
