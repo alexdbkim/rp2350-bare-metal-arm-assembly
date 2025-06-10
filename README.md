@@ -142,7 +142,7 @@ I used **Two Pico 2 W** one as debug probe and another as target containing prog
     Info : Listening on port 3333 for gdb connections
     ```
     You can stop it now.
-    
+
 1. Setting up VS Code
 
     Setting up VS code is relative easy. If you haven't, install VS code.
@@ -198,9 +198,8 @@ I used **Two Pico 2 W** one as debug probe and another as target containing prog
 
 1. And press F5! which will start debug sessions.
 
+    ![VS Code Debugging](./docs/images/debug-vscode.png)
     
-
-
 
 ## References
 

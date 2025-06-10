@@ -5,7 +5,7 @@
             "name": "Coretex Debug",
             "type": "cortex-debug",
             "executable": "${workspaceFolder}/examples/002.Blink/bin/blink.elf",
-            "request": "attach",
+            "request": "launch",
             "servertype": "openocd",
             "device": "RP2350",
             "configFiles": [
