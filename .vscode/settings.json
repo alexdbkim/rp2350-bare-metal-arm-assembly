@@ -1,0 +1,4 @@
+{
+    "cortex-debug.openocdPath.osx": "/Users/ak/repo/openocd/src/openocd",
+    "cortex-debug.variableUseNaturalFormat": true,
+}
