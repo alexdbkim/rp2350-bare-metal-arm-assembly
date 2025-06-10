@@ -9,8 +9,8 @@ OBJCOPY = arm-none-eabi-objcopy
 OBJDUMP = arm-none-eabi-objdump
 PICOTOOL = picotool
 
-AS_FLAGS = -mcpu=cortex-m33 -mthumb --warn --fatal-warnings
-LD_FLAGS = -nostdlib
+AS_FLAGS = -mcpu=cortex-m33 -mthumb --warn --fatal-warnings -g
+LD_FLAGS = -nostdlib -g
 OBJDUMP_FLAGS = -D -s -f -r -x -WL --architecture=cortex-m33
 
 LD_SCRIPT = $(NAME).ld

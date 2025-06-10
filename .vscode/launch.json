@@ -1,0 +1,21 @@
+{
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "name": "Coretex Debug",
+            "type": "cortex-debug",
+            "executable": "${workspaceFolder}/examples/002.Blink/bin/blink.elf",
+            "request": "launch",
+            "servertype": "openocd",
+            "device": "RP2350",
+            "configFiles": [
+                "/Users/ak/repo/openocd/tcl/interface/cmsis-dap.cfg",
+                "/Users/ak/repo/openocd/tcl/target/rp2350.cfg"
+            ],
+            "searchDir": ["/Users/ak/repo/openocd/tcl"],
+            "svdFile": "/Users/ak/repo/pico-sdk/src/rp2350/hardware_regs/RP2350.svd",
+            "gdbTarget": "localhost:3333",
+            "showDevDebugOutput": "vscode"
+        }
+    ]
+}
