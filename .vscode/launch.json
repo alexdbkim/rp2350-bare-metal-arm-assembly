@@ -15,7 +15,7 @@
             "searchDir": ["/Users/ak/repo/openocd/tcl"],
             "svdFile": "/Users/ak/repo/pico-sdk/src/rp2350/hardware_regs/RP2350.svd",
             "gdbTarget": "localhost:3333",
-            "showDevDebugOutput": "vscode"
+            "showDevDebugOutput": "raw"
         }
     ]
 }
