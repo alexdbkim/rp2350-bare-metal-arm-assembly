@@ -1,13 +1,11 @@
 @==============================================================================
 @
-@   MCU     : Raspberry Pi RP2305A
-@   CPU     : ARM Cortex-M33 (32-bit)
-@   Cores   : 2
-@   Date    : June 4, 2025
-@
-@   RP2350 Metadata Block
+@   RP2350 Metadata Block Definition
 @
 @==============================================================================
+
+.ifndef __METADATA_BLOCK_S__
+.equ    __METADATA_BLOCK_S__, 1
 
 @------------------------------------------------------------------------------
 @ Block Markers (RP2350 Datasheet 5.1.5)
@@ -87,3 +85,5 @@
 @ the correct full length of the entire block.
 
 .equ PICOBIN_BLOCK_ITEM_2BS_LAST, 0xff
+
+.endif @ __METADATA_BLOCK_S__
