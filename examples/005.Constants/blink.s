@@ -1,6 +1,7 @@
 
 .include "include/binary_header.s"
 .include "include/address_map.s"
+.include "include/sio.s"
 
 .syntax unified
 .align 4

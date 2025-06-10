@@ -1,5 +1,5 @@
 .ifndef INCLUDE_BINARY_HEADER_S
-.set    INCLUDE_BINARY_HEADER_S, 1
+.equ    INCLUDE_BINARY_HEADER_S, 1
 
 .syntax unified
 .align 4
