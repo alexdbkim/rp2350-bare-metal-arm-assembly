@@ -1,3 +1,5 @@
 
-**/bin
-**/dump
+**/*/bin
+**/*/debug
+**/*/release
+**/*/dump
